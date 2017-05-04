@@ -1,0 +1,71 @@
+src/client.c:      if ((kart = players[i].info->skin) > -1)
+src/client.c:	  put_word(players[i].info->name,
+src/client.c:  while (sfRenderWindow_isOpen(window->window) && players[0].info->skin > 0
+src/client.c:	 && players[1].info->dir == -1)
+src/client.c:  if (players[1].info->dir == 0)
+src/client.c:  players[0].info->skin = -1;
+Fichier binaire src/client.o correspondant
+Fichier binaire src/free.o correspondant
+Fichier binaire src/gogoby.o correspondant
+src/ingame_host.c:  players[0].info->pos = player_start(map);
+Fichier binaire src/ingame_host.o correspondant
+src/init_players.c:  if (my_strcpy(info->name, name) == -1)
+src/init_players.c:    zeros(info->name, NAME_SIZE);
+src/init_players.c:  info->skin = skin;
+src/init_players.c:      players[i].info->dir = -1;
+src/init_players.c:      players[i].info->pos = START;
+Fichier binaire src/init_players.o correspondant
+Fichier binaire src/init_textures.o correspondant
+src/listener.c:      if (my_strlen(players[i].info->name) == 0)
+src/listener.c:    players[0].info->skin = -2;
+src/listener.c:  while (i < MAX_PLAYERS && i != -1 && players[0].info->skin != -2)
+Fichier binaire src/listener.o correspondant
+src/lobby.c:	players[0].info->dir = 0;
+src/lobby.c:      if ((kart = players[i].info->skin) > -1)
+src/lobby.c:	  put_word(players[i].info->name,
+src/lobby.c:  while (sfRenderWindow_isOpen(window->window) && players[0].info->dir != 0)
+src/lobby.c:      if (players[0].info->skin == -2)
+src/lobby.c:  if (players[0].info->dir == 0)
+src/lobby.c:  players[0].info->skin = -1;
+Fichier binaire src/lobby.o correspondant
+src/main.c:  players[0].info->skin = kart;
+src/main.c:    my_strcpy(players[0].info->name, av[2]);
+src/main.c:    my_strcpy(players[0].info->name, av[3]);
+src/main.c:  players[0].info->name[NAME_SIZE - 1] = 0;
+Fichier binaire src/main.o correspondant
+src/moves.c:	player->info->dir -= ROLL;
+src/moves.c:	player->info->dir += ROLL;
+src/moves.c:  prev = info->pos;
+src/moves.c:  info->pos.x += MOVEX;
+src/moves.c:  info->pos.y -= MOVEY;
+src/moves.c:  if (map[(int)info->pos.y][(int)info->pos.x] != '0')
+src/moves.c:      if (map[(int)info->pos.y][(int)prev.x] == '0')
+src/moves.c:	  prev.y = info->pos.y;
+src/moves.c:	  info->pos = prev;
+src/moves.c:      if (map[(int)prev.y][(int)info->pos.x] == '0')
+src/moves.c:	  prev.x = info->pos.x;
+src/moves.c:	  info->pos = prev;
+src/moves.c:      info->pos = prev;
+Fichier binaire src/moves.o correspondant
+src/raycast.c:      dist = raycast(player->info->pos, player->info->dir + angle, map);
+Fichier binaire src/raycast.o correspondant
+src/receive.c:  my_strcpy(info->name, new.name);
+src/receive.c:  info->skin = new.skin;
+src/receive.c:  info->pos = XY(new.pos.x, new.pos.y);
+src/receive.c:  info->dir = new.dir;
+src/receive.c:	  zeros(players[i].info->name, NAME_SIZE);
+src/receive.c:	  players[i].info->skin = -1;
+src/receive.c:  if (players[0].info->skin < 0)
+src/receive.c:    players[0].info->skin = -2;
+src/receive.c:  while (i < MAX_PLAYERS && players[i].info->skin != -1)
+src/receive.c:	if (my_strcmp(temp.name, players[i].info->name) == 0
+src/receive.c:	    && my_strcmp(temp.name, players[0].info->name) != 0)
+Fichier binaire src/receive.o correspondant
+src/send.c:      while (j < MAX_PLAYERS && players[i].info->skin != -1)
+src/send.c:	  if (i != j && my_strlen(players[j].info->name) != 0)
+src/send.c:  if (player[0].info->skin != -2)
+src/send.c:	player[0].info->skin = -2;
+Fichier binaire src/send.o correspondant
+src/thread.c:  while (players[0].info->skin > 0)
+src/thread.c:  while (players[0].info->skin > 0)
+Fichier binaire src/thread.o correspondant
