@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Thu Oct 13 09:19:01 2016 Leandre Blanchard
-** Last update Thu May  4 19:57:56 2017 Léandre Blanchard
+** Last update Thu Jun  1 14:37:43 2017 Léandre Blanchard
 */
 
 #ifndef MY_H_
@@ -13,6 +13,27 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stddef.h>
+
+# define ABS(x) (x < 0) ? -x : x
+
+void	*my_malloc(size_t size);
+
+void	free_my(void);
+
+void	my_free(void *ptr);
+
+int	max_len(char **tab);
+
+char	**tabdup(char **tab);
+
+char	**load_file(const char *pathname);
+
+int	file_size(const char *pathname);
+
+int	revtab(char **tab);
+
+char	**tab_append(char **tab, char *add);
 
 int	end_with(const char *s, const char *end);
 
@@ -24,7 +45,7 @@ char	**my_str_to_wordtab(const char *s, int no);
 
 int	rm_ascii(char *);
 
-char	*my_catalloc(char *, const char *, const char *);
+char	*my_catalloc(const char *, const char *, const char *);
 
 void	shift_left(char *, int);
 

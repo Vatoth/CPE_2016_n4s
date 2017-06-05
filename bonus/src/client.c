@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May  3 17:40:29 2017 Léandre Blanchard
-** Last update Thu May  4 12:28:53 2017 Léandre Blanchard
+** Last update Wed May 31 21:31:06 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -41,9 +41,12 @@ static int	display(t_window *window, t_texture *textures,
   put_sprite(window, textures->sprites[0], ORIGIN);
   put_sprite(window, textures->lakitu[a / 35  % 8],
 	     XY(W_2 + 10 * cos((float)a / 20), 50 + 10 * sin((float)a / 20)));
+  if (key_released(sfKeySpace))
+    players[0].info->skin = (players[0].info->skin + 1) % NB_KARTS;
   while (i < MAX_PLAYERS)
     {
-      if ((kart = players[i].info->skin) > -1)
+      if ((kart = players[i].info->skin) > -1
+	  && players[i].info->status > -1)
 	{
 	  put_sprite_resize(window, textures->karts[kart][5],
 			    XY(100 + i * 150, H_2 + 200), XY(3, 3));
@@ -65,17 +68,17 @@ int		client(t_window *window, t_texture *textures,
     return (-1);
   thread = sfThread_create((void *)sockets_manager_client, (void *)players);
   sfThread_launch(thread);
-  while (sfRenderWindow_isOpen(window->window) && players[0].info->skin > 0
-	 && players[1].info->dir == -1)
+  while (sfRenderWindow_isOpen(window->window)
+	 && players[1].info->status != 1)
     {
       window_clear(window);
       display(window, textures, players);
       close_win(window);
       window_refresh(window);
     }
-  if (players[1].info->dir == 0)
-    my_printf("GOOOOOOOO\n");
-  players[0].info->skin = -1;
+  if (players[1].info->status == 1)
+    ingame_client(window, textures, players);
+  players[0].info->status = -1;
   usleep(2000);
   free_thread(thread);
   return (0);

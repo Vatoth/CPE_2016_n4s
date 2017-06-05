@@ -5,12 +5,12 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Tue May  2 18:39:04 2017 Léandre Blanchard
-** Last update Thu May  4 15:20:50 2017 Léandre Blanchard
+** Last update Fri Jun  2 13:40:48 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
 
-static int		fill_karts(t_sprite **sprites, const char *pathname)
+int			fill_karts(t_sprite **sprites, const char *pathname)
 {
   sfTexture		*texture;
   int			x;
@@ -56,63 +56,6 @@ static sfImage		**init_images(void)
   return (images);
 }
 
-static int		all_karts(t_sprite ***sprites)
-{
-  struct dirent		*folder;
-  DIR			*dir;
-  char			*s;
-  int			i;
-
-  i = 0;
-  my_printf(BOX_, BOLDWHITE, RESET);
-  if ((dir = opendir(KART_FOLDER)) == NULL)
-    return (-1);
-  while ((folder = readdir(dir)) != NULL && i != NB_KARTS)
-    if (end_with(folder->d_name, ".png") == 0)
-      {
-	if ((s = my_catalloc(KART_FOLDER, folder->d_name, NULL)) == NULL)
-	  return (-1);
-	my_printf(BOLDRED);
-	if ((fill_karts(sprites[i], s)) == -1)
-	  return (-1);
-	my_printf(KART_FOUND, BOLDGREEN, BOLDCYAN, s, BOLDGREEN, RESET);
-	free(s);
-	i++;
-      }
-  closedir(dir);
-  my_printf(BOX_, BOLDWHITE, RESET);
-  return (0);
-}
-
-static t_sprite		*load_one(const char *pathname, const char *name)
-{
-  t_sprite		*sprite;
-
-  if ((sprite = create_sprite(pathname)) == NULL)
-    return (NULL);
-  my_printf(SPRITE_FOUND, BOLDGREEN, BOLDYELLOW, name,
-	    BOLDGREEN, RESET);
-  return (sprite);
-}
-
-static int		all_sprites(t_sprite **sprites)
-{
-  int			i;
-
-  sprites[0] = load_one("sprites/lobby.png", "lobby.png");
-  sprites[1] = load_one("sprites/button.png", "button.png");
-  sprites[2] = load_one("sprites/button_pressed.png", "button_pressed.png");
-  sprites[3] = load_one("sprites/clouds.png", "clouds.png");
-  sprites[4] = load_one("sprites/road.png", "road.png");
-  i = 0;
-  while (i != NB_SPRITES)
-    if (sprites[i++] == NULL)
-      return (-1);
-  sprites[NB_SPRITES] = NULL;
-  my_printf(BOX_, BOLDWHITE, RESET);
-  return (0);
-}
-
 t_texture		*init_textures(void)
 {
   t_texture		*textures;
@@ -128,7 +71,6 @@ t_texture		*init_textures(void)
   textures->karts[NB_KARTS] = NULL;
   if ((textures->sprites = malloc(16 * NB_SPRITES + 8)) == NULL)
     return (NULL);
-  textures->karts[NB_SPRITES] = NULL;
   while (i != NB_KARTS)
     if ((textures->karts[i++] = create_sprites(11)) == NULL)
       return (NULL);

@@ -5,10 +5,11 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Sun Apr  2 12:20:16 2017 Léandre Blanchard
-** Last update Sun Apr 30 20:33:11 2017 Léandre Blanchard
+** Last update Sun May 28 17:57:05 2017 Léandre Blanchard
 */
 
 #include "csfml.h"
+#include "my.h"
 #include "../colors.h"
 
 void			put_sprite(t_window *window, t_sprite *sprite, sfVector2f pos)
@@ -35,14 +36,14 @@ t_sprite		*create_sprite(const char *pathname)
   my_printf(BOLDRED);
   if ((sprite->texture = sfTexture_createFromFile(pathname, NULL)) == NULL)
     {
-      free(sprite);
+      my_free(sprite);
       return (NULL);
     }
   my_printf(RESET);
   if ((sprite->sprite = sfSprite_create()) == NULL)
     {
       sfTexture_destroy(sprite->texture);
-      free(sprite);
+      my_free(sprite);
       return (NULL);
     }
   sfSprite_setTexture(sprite->sprite, sprite->texture, sfTrue);

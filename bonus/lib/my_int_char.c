@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 14:14:41 2017 Léandre Blanchard
-** Last update Wed May  3 14:31:26 2017 Léandre Blanchard
+** Last update Wed May 31 14:19:38 2017 Léandre Blanchard
 */
 
 #include "my.h"
@@ -19,7 +19,7 @@ char            *int_char(int nb)
   ret = 0;
   if (nb == 0)
     return (my_strdup("0"));
-  if ((str = my_calloc(my_intlen(nb) + 1)) == NULL)
+  if ((str = my_calloc(my_intlen(nb) + 3)) == NULL)
     return (NULL);
   i = 0;
   if (nb < 0)

@@ -5,12 +5,13 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Mon Apr  3 19:27:11 2017 Léandre Blanchard
-** Last update Wed May  3 00:14:34 2017 Léandre Blanchard
+** Last update Thu Jun  1 14:37:54 2017 Léandre Blanchard
 */
 
 #include "my.h"
 
-char		*my_catalloc(char *s, const char *s_2, const char *s_3)
+char		*my_catalloc(const char *s,
+			     const char *s_2, const char *s_3)
 {
   char		*out;
   int		len;

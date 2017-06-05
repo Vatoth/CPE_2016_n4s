@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Thu May  4 12:45:48 2017 Léandre Blanchard
-** Last update Thu May  4 19:33:37 2017 Léandre Blanchard
+** Last update Tue May 30 19:36:25 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -17,31 +17,6 @@ static sfVector2f	move_forward(sfVector2f pos, float direction,
   pos.x = pos.x + distance * cos(direction);
   pos.y = pos.y - distance * sin(direction);
   return (pos);
-}
-
-static int		change(sfVector2f ray, sfVector2f prev, int *change, float *dist)
-{
-  if ((int)ray.x != (int)prev.x || (int)ray.y != (int)prev.y)
-    {
-      if ((int)ray.y != (int)prev.y)
-	(*change = 1);
-      else
-	(*change = 0);
-    }
-  if (*change == 1)
-    *dist = TEXTURE_SIZE * fmodf(ray.x, 1);
-  else
-    *dist = TEXTURE_SIZE * fmodf(ray.y, 1);
-  return (0);
-}
-
-static int		select_texture(char c)
-{
-  if (c == '<' || c == 'v')
-    return (2);
-  if (c == '>' || c == 'A')
-    return (1);
-  return (0);
 }
 
 t_cast			raycast(sfVector2f pos, float direction, char **map)
@@ -83,25 +58,16 @@ void			draw_column(t_window *window, sfVector2f from,
   images = textures->images;
   i = 0;
   y = from.y;
-  while (y < from.y + dist.wall_h && y < H_)
+  while (y < from.y + dist.wall_h - 1 && y < H_ - 1)
     {
       color = sfImage_getPixel(images[dist.texture],
-	(int)dist.x % TEXTURE_SIZE, (float)TEXTURE_SIZE / dist.wall_h * i);
+	 (int)dist.x % (TEXTURE_SIZE - 2), (float)TEXTURE_SIZE / dist.wall_h * i);
       if (dist.change == 0)
 	color = sfColor_fromRGB(color.r / 2, color.g / 2, color.b / 2);
       my_put_pixel(window, from.x, y, color);
       y++;
       i++;
     }
-}
-
-void			special_clear(t_window *window)
-{
-  int			i;
-
-  i = 0;
-  while (i < 4 * window->width * window->height)
-    window->pixels[i++] = 0;
 }
 
 void			walls(t_window *window, char **map,
@@ -118,7 +84,7 @@ void			walls(t_window *window, char **map,
   while (x < window->width)
     {
       dist = raycast(player->info->pos, player->info->dir + angle, map);
-      dist.dist *= cos(M_PI / 200 * angle);
+      dist.dist *= cos((float)M_PI / (float)200 * angle);
       if (dist.dist < 0.05)
 	dist.dist = 0.05;
       dist.wall_h = PROJ / dist.dist / 2;

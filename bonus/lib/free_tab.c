@@ -5,10 +5,10 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Tue Feb 28 14:14:05 2017 Léandre Blanchard
-** Last update Sun Apr 30 16:47:15 2017 Léandre Blanchard
+** Last update Sun May 28 17:54:23 2017 Léandre Blanchard
 */
 
-#include <stdlib.h>
+#include "my.h"
 
 void	        free_tab(char **tab)
 {
@@ -18,7 +18,8 @@ void	        free_tab(char **tab)
   if (tab != NULL)
     {
       while (tab[i] != NULL)
-	free(tab[i++]);
-      free(tab);
+	my_free(tab[i++]);
+      my_free(tab);
+      tab = NULL;
     }
 }

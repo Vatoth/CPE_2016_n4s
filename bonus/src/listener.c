@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May  3 16:55:48 2017 Léandre Blanchard
-** Last update Thu May  4 11:35:48 2017 Léandre Blanchard
+** Last update Tue May 30 19:50:38 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -35,8 +35,8 @@ int		listener(t_player *players)
   if ((listener = sfTcpListener_create()) == NULL)
     return (-1);
   if (sfTcpListener_listen(listener, PORT) == sfSocketError)
-    players[0].info->skin = -2;
-  while (i < MAX_PLAYERS && i != -1 && players[0].info->skin != -2)
+    players[0].info->status = -2;
+  while (i < MAX_PLAYERS && i != -1 && players[0].info->status != -2)
     {
       if (sfTcpListener_accept(listener, &players[i].socket) == sfSocketDone)
 	{

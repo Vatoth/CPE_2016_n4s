@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May  3 17:24:53 2017 Léandre Blanchard
-** Last update Thu May  4 11:43:53 2017 Léandre Blanchard
+** Last update Tue May  9 15:05:05 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -16,6 +16,7 @@ static int	update_info(t_info *info, t_info new)
   info->skin = new.skin;
   info->pos = XY(new.pos.x, new.pos.y);
   info->dir = new.dir;
+  info->status = new.status;
   return (0);
 }
 
@@ -23,20 +24,23 @@ void		host_receive(t_player *players)
 {
   size_t	size;
   int		i;
+  t_info	temp;
 
   i = 1;
   while (i < MAX_PLAYERS)
     {
       if ((sfTcpSocket_receive(players[i].socket,
-			       players[i].info, sizeof(t_info),
+			       &temp, sizeof(t_info),
 			       &size)) == sfSocketDisconnected)
 	{
 	  my_printf(PLAYER_DC, BOLDBLUE, i + 1, RESET);
 	  zeros(players[i].info->name, NAME_SIZE);
-	  players[i].info->skin = -1;
+	  players[i].info->status = -1;
 	  sfTcpSocket_destroy(players[i].socket);
 	  players[i].socket = sfTcpSocket_create();
 	}
+      if (size == sizeof(t_info))
+	update_info(players[i].info, temp);
       i++;
     }
 }
@@ -49,14 +53,14 @@ int		client_receive(t_player *players)
   t_info	temp;
 
   i = 0;
-  if (players[0].info->skin < 0)
+  if (players[0].info->status < 0)
     return (-1);
   if ((sfTcpSocket_receive(players[0].socket, &temp, sizeof(t_info),
 			   &size)) == sfSocketDisconnected)
-    players[0].info->skin = -2;
+    players[0].info->status = -2;
   if (size != sizeof(t_info))
     return (-1);
-  while (i < MAX_PLAYERS && players[i].info->skin != -1)
+  while (i < MAX_PLAYERS && players[i].info->status >= 0)
     {
       if (i > 0)
 	if (my_strcmp(temp.name, players[i].info->name) == 0

@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Thu Oct 13 09:19:01 2016 Leandre Blanchard
-** Last update Mon Apr 10 02:18:31 2017 Léandre Blanchard
+** Last update Thu Jun  1 14:37:43 2017 Léandre Blanchard
 */
 
 #ifndef MY_H_
@@ -13,10 +13,39 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stddef.h>
+
+# define ABS(x) (x < 0) ? -x : x
+
+void	*my_malloc(size_t size);
+
+void	free_my(void);
+
+void	my_free(void *ptr);
+
+int	max_len(char **tab);
+
+char	**tabdup(char **tab);
+
+char	**load_file(const char *pathname);
+
+int	file_size(const char *pathname);
+
+int	revtab(char **tab);
+
+char	**tab_append(char **tab, char *add);
+
+int	end_with(const char *s, const char *end);
+
+char	**tab_realloc(char **tab, int add);
+
+char    *complete_read_lseek(int fd);
+
+char	**my_str_to_wordtab(const char *s, int no);
 
 int	rm_ascii(char *);
 
-char	*my_catalloc(const char *, const char *);
+char	*my_catalloc(const char *, const char *, const char *);
 
 void	shift_left(char *, int);
 
@@ -54,13 +83,13 @@ int	epur_str(char *);
 
 int	total_name(const char *);
 
-void	zeros(char *, int);
+int	zeros(char *, int);
 
 void	my_putchar(char);
 
 int	my_isneg(int);
 
-int	my_put_nbr(long long);
+void	my_put_nbr(int);
 
 void	my_putnbr_base(int, const char *);
 
@@ -82,7 +111,7 @@ int	my_is_prime(int);
 
 int	my_find_prime(int);
 
-char	*my_strcpy(char *, const char *);
+int	my_strcpy(char *, const char *);
 
 char	*my_strncpy(char *, const char *, int);
 
@@ -114,7 +143,7 @@ int	my_showstr(char *);
 
 int	my_showmem(char *, int);
 
-char	*my_strcat(char *, const char *);
+int	my_strcat(char *, const char *);
 
 char	*my_strncat(char *, const char *, int);
 
@@ -130,7 +159,7 @@ char	*my_revstr(char *);
 
 char	*int_to_char(int);
 
-char	*my_putstr_error(const char *);
+void	my_putstr_error(const char *);
 
 int	my_printf(const char *, ...);
 
@@ -139,5 +168,7 @@ int	my_tablen(char **);
 int	my_int_len(int);
 
 void	my_put_tab(char **);
+
+void	my_put_tabw(const char *, char **, const char *);
 
 #endif /* !MY_H_ */

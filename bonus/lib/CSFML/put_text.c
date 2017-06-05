@@ -5,10 +5,11 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 14:08:05 2017 Léandre Blanchard
-** Last update Sun Apr 30 17:32:20 2017 Léandre Blanchard
+** Last update Sun May 28 17:57:15 2017 Léandre Blanchard
 */
 
 #include "csfml.h"
+#include "my.h"
 
 void            put_word(char *word, sfVector2f pos,
 			 t_window *window, sfColor color)
@@ -16,7 +17,7 @@ void            put_word(char *word, sfVector2f pos,
   sfFont        *font;
   sfText        *text;
 
-  if (window->font != NULL)
+  if (window->font != NULL && word != NULL)
     {
       font = sfFont_createFromFile(window->font);
       text = sfText_create();
@@ -40,7 +41,7 @@ void            put_number(int nb, sfVector2f pos,
     {
       str = int_char(nb);
       put_word(str, pos, window, color);
-      free(str);
+      my_free(str);
     }
   else
     put_word("0", pos, window, sfRed);

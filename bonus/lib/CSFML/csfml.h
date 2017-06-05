@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri Mar 31 13:58:23 2017 Léandre Blanchard
-** Last update Thu May  4 15:17:00 2017 Léandre Blanchard
+** Last update Fri May  5 11:11:48 2017 Léandre Blanchard
 */
 
 #ifndef MY_CSFML_H_
@@ -39,11 +39,10 @@ typedef struct		s_window
   int			width;
   int			height;
   sfVector2i		mouse;
-  sfEvent		event;
   sfRenderWindow	*window;
   sfUint8		*pixels;
   char			*font;
-  sfMusic		*music;
+  sfMusic		**musics;
   sfTexture		*texture;
   sfSprite		*sprite;
 }			t_window;

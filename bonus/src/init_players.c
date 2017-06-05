@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May  3 13:47:49 2017 Léandre Blanchard
-** Last update Thu May  4 12:17:11 2017 Léandre Blanchard
+** Last update Sat May  6 00:39:18 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -31,11 +31,13 @@ t_player	*init_players(int nb)
       if ((players[i].info = malloc(sizeof(t_info))) == NULL)
 	return (NULL);
       fill_info(players[i].info, NULL, -1);
-      players[i].info->dir = -1;
+      players[i].info->dir = 90;
       players[i].info->pos = START;
+      players[i].info->status = -1;
       if ((players[i].socket = sfTcpSocket_create()) == NULL)
 	return (NULL);
       i++;
     }
+  players[0].info->status = 0;
   return (players);
 }

@@ -5,10 +5,11 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed Apr  5 14:48:58 2017 Léandre Blanchard
-** Last update Mon Apr 24 11:41:16 2017 Léandre Blanchard
+** Last update Sun May 28 17:56:55 2017 Léandre Blanchard
 */
 
 #include "csfml.h"
+#include "my.h"
 
 void		free_sprites_only(t_sprite **sprites)
 {
@@ -22,9 +23,9 @@ void		free_sprites_only(t_sprite **sprites)
 	{
 	  if (sprites[i]->sprite != NULL)
 	    sfSprite_destroy(sprites[i]->sprite);
-	  free(sprites[i++]);
+	  my_free(sprites[i++]);
 	}
-      free(sprites);
+      my_free(sprites);
     }
 }
 
@@ -40,7 +41,23 @@ void		free_sprites(t_sprite **sprites)
 	  free_sprite(sprites[i]);
 	  i++;
 	}
-      free(sprites);
+      my_free(sprites);
+    }
+}
+
+void		free_musics(sfMusic **musics)
+{
+  int		i;
+
+  i = 0;
+  if (musics != NULL)
+    {
+      while (musics[i] != NULL)
+	{
+	  sfMusic_destroy(musics[i]);
+	  i++;
+	}
+      my_free(musics);
     }
 }
 
@@ -52,7 +69,7 @@ void            free_sprite(t_sprite *sprite)
 	sfSprite_destroy(sprite->sprite);
       if (sprite->texture != NULL)
 	sfTexture_destroy(sprite->texture);
-      free(sprite);
+      my_free(sprite);
     }
 }
 
@@ -63,21 +80,14 @@ void            free_window(t_window *window)
       if (window->window != NULL)
 	sfRenderWindow_destroy(window->window);
       if (window->pixels != NULL)
-	free(window->pixels);
+	my_free(window->pixels);
       if (window->font != NULL)
-	free(window->font);
-      if (window->music != NULL)
-	sfMusic_destroy(window->music);
+	my_free(window->font);
+      free_musics(window->musics);
       if (window->texture != NULL)
 	sfTexture_destroy(window->texture);
       if (window->sprite != NULL)
 	sfSprite_destroy(window->sprite);
-      free(window);
+      my_free(window);
     }
-}
-
-void		free_thread(sfThread *thread)
-{
-  sfThread_terminate(thread);
-  sfThread_destroy(thread);
 }

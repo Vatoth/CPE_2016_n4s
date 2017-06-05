@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Mon Apr  3 16:40:21 2017 Léandre Blanchard
-** Last update Thu Apr 27 21:33:15 2017 Léandre Blanchard
+** Last update Wed May 24 16:39:57 2017 Léandre Blanchard
 */
 
 #include "get_next_line.h"
@@ -16,7 +16,7 @@ static char	*my_free_realloc(char *s, int size)
 
   if ((out = my_realloc(s, size)) == NULL)
     return (NULL);
-  free(s);
+  my_free(s);
   return (out);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri Mar 17 18:13:15 2017 Léandre Blanchard
-** Last update Sun Apr 30 16:48:40 2017 Léandre Blanchard
+** Last update Tue May  9 16:41:14 2017 Léandre Blanchard
 */
 
 #include "my.h"
@@ -16,15 +16,15 @@ char		**my_alloc_tab(int height, int width)
   int		i;
 
   i = 0;
-  if ((tab = malloc(sizeof(char *) * height)) == NULL)
+  if ((tab = malloc(sizeof(char *) * height + 8)) == NULL)
     return (NULL);
   while (i != height)
     {
-      if ((tab[i] = malloc(sizeof(char) * width)) == NULL)
+      if ((tab[i] = malloc(sizeof(char) * width + 1)) == NULL)
 	return (NULL);
-      zeros(tab[i], width);
+      zeros(tab[i], width + 1);
       i++;
     }
-  tab[height - 1] = NULL;
+  tab[height] = NULL;
   return (tab);
 }

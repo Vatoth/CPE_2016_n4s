@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Tue May  2 19:00:59 2017 Léandre Blanchard
-** Last update Wed May  3 17:10:02 2017 Léandre Blanchard
+** Last update Tue May 30 19:44:58 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -22,7 +22,7 @@ void		free_images(sfImage **images)
 	  sfImage_destroy(images[i]);
 	  i++;
 	}
-      free(images);
+      my_free(images);
     }
 }
 
@@ -35,7 +35,7 @@ void		free_all_sprites(t_sprite ***sprites)
     {
       while (sprites[i] != NULL)
 	free_sprites_only(sprites[i++]);
-      free(sprites);
+      my_free(sprites);
     }
 }
 
@@ -47,9 +47,12 @@ void		free_sprite_spec(t_sprite **sprites)
   if (sprites != NULL)
     {
       while (sprites[i] != NULL)
-	sfSprite_destroy(sprites[i++]->sprite);
+	{
+	  sfSprite_destroy(sprites[i]->sprite);
+	  i++;
+	}
       sfTexture_destroy(sprites[0]->texture);
-      free(sprites);
+      my_free(sprites);
     }
 }
 
@@ -61,7 +64,7 @@ void		free_textures(t_texture *textures)
       free_all_sprites(textures->karts);
       free_sprite_spec(textures->lakitu);
       free_sprites(textures->sprites);
-      free(textures);
+      my_free(textures);
     }
 }
 
@@ -74,10 +77,10 @@ void		free_players(t_player *players)
       i = 0;
       while (i != MAX_PLAYERS)
 	{
-	  free(players[i].info);
+	  my_free(players[i].info);
 	  sfTcpSocket_destroy(players[i].socket);
 	  i++;
 	}
-      free(players);
+      my_free(players);
     }
 }
