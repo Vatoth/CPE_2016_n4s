@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Thu May  4 21:13:50 2017 Léandre Blanchard
-** Last update Mon Jun  5 15:58:28 2017 Léandre Blanchard
+** Last update Tue Jun  6 14:18:06 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -80,7 +80,8 @@ void			display_me(t_window *window, t_texture *textures,
   put_word("%", XY(W_ - 50, H_ - 70), window, sfWhite);
 }
 
-void			display_background(t_window *window, t_texture *textures, float dir)
+void			display_background(t_window *window,
+					   t_texture *textures, float dir)
 {
   int			b;
 

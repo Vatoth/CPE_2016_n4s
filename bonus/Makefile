@@ -5,7 +5,7 @@
 ## Login   <leandre.blanchard@epitech.eu>
 ## 
 ## Started on  Thu Dec 15 20:24:11 2016 Léandre Blanchard
-## Last update Mon Jun  5 15:53:57 2017 Léandre Blanchard
+## Last update Sat Jun 10 16:00:47 2017 
 ##
 
 NAME	= tek_kart
@@ -53,7 +53,7 @@ RM	= rm -f
 
 CPPFLAGS += -I ./include
 
-CFLAGS	+= -W -Wall -Wextra -O2
+CFLAGS	+= -W -Wall -Wextra -Ofast -Os
 
 all: $(LIB_A) $(NAME)
 

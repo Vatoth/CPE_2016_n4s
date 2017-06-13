@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May  3 13:47:25 2017 Léandre Blanchard
-** Last update Thu Jun  1 15:35:32 2017 Léandre Blanchard
+** Last update Fri Jun  9 08:25:47 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -51,16 +51,20 @@ static int	button(t_window *window, t_texture *textures, t_player *players)
   return (0);
 }
 
-static int	display(t_window *window, t_texture *textures, t_player *players)
+static void	display(t_window *window,
+			t_texture *textures,
+			t_player *players)
 {
   static int	a;
   int		i;
+  static int   	alt = 1;
   int		kart;
 
-  i = 0;
+  i = 1;
   put_sprite(window, SPRITE(LOBBY), ORIGIN);
-  put_sprite(window, textures->lakitu[a / 35  % 8],
-	     XY(W_2 + 10 * cos((float)a / 20), 50 + 10 * sin((float)a / 20)));
+  put_sprite_resize(window, textures->karts[players[0].info->skin][a / 30],
+		    XY(W_2 - 115, H_2 - 115), XY(7, 7));
+  put_word(players[0].info->name, XY(W_2 - 65, H_2 - 155), window, sfWhite);
   button(window, textures, players);
   while (i < MAX_PLAYERS)
     {
@@ -74,8 +78,8 @@ static int	display(t_window *window, t_texture *textures, t_player *players)
 	}
       i++;
     }
-  a = (a + 1) % 1600;
-  return (0);
+  alt = (a == 0) ? 1 : (a == 300) ? 0 : alt;
+  a = (alt == 1) ? (a + 1) : (a - 1);
 }
 
 int		lobby(t_window *window, t_texture *textures, t_player *players)

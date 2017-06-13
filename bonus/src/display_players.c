@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri May  5 12:10:22 2017 Léandre Blanchard
-** Last update Mon Jun  5 11:44:34 2017 Léandre Blanchard
+** Last update Tue Jun  6 15:16:49 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -36,6 +36,8 @@ float		angle(sfVector2f me, sfVector2f you,
   dist.z = distance(you, point);
   angle = acos((cube(dist.x) + cube(dist.y) - cube(dist.z)) /
 	       (2 * dist.x * dist.y));
+  if (angle < 0 || angle > 90)
+    return (-1);
   dist.z = distance(you, XY(me.x + TESTX, me.y - TESTY));
   test = acos((cube(dist.x) + cube(dist.y) - cube(dist.z)) /
 	      (2 * dist.x * dist.y));
@@ -73,8 +75,8 @@ int		display_players(t_window *window,
 	  t.point = XY(players[0].info->pos.x + TRACEX,
 		     players[0].info->pos.y - TRACEY);
 	  t.dist = distance(players[0].info->pos, players[i].info->pos);
-	  t.ang = angle(players[0].info->pos, players[i].info->pos,
-		      t.point, XY(t.dist, PDIR));
+	  if ((t.ang = ANGL, t.point, XY(t.dist, PDIR))) == -1)
+	    return (0);
 	  t.from = PROJ * sin(t.ang) / sin(t.ang + M_PI / 2);
 	  if (t.from > 640)
 	    t.from = 640 + (t.from - 640) / 2.5;

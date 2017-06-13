@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Tue Oct 11 09:27:45 2016 Leandre Blanchard
-** Last update Tue May  2 18:56:05 2017 Léandre Blanchard
+** Last update Tue Jun 13 17:54:29 2017 
 */
 
 #include "my.h"
@@ -19,6 +19,6 @@ int	my_strcat(char *dest, const char *src)
   ret = dest;
   while (*dest)
     dest++;
-  while (*dest++ = *src++);
+  while ((*dest++ = *src++));
   return (0);
 }

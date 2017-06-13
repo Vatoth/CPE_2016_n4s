@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Tue May  2 18:25:26 2017 Léandre Blanchard
-** Last update Mon Jun  5 15:53:03 2017 Léandre Blanchard
+** Last update Tue Jun  6 15:16:41 2017 Léandre Blanchard
 */
 
 #ifndef N4S_H_
@@ -36,6 +36,7 @@
 # define TRACEY 10 * sin(M_PI / 180.0 * (PDIR - FOV / 2))
 # define TESTX 10 * cos(M_PI / 180.0 * dir_dist.y)
 # define TESTY 10 * sin(M_PI /180.0 * dir_dist.y)
+# define ANGL angle(players[0].info->pos, players[i].info->pos
 # define PROJ window->width / 2 * tan(30 * M_PI / (180 - FOV * 2 / 3))
 # define TEXTURE_SIZE 64
 # define USAGE1 "%s./tek_kart --join [ip_address] [nickname]%s%s\n"
@@ -147,6 +148,8 @@ typedef struct	s_time
 }		t_time;
 
 t_time		timer;
+
+float		distance(sfVector2f from, sfVector2f to);
 
 void		init_time(t_time *time);
 

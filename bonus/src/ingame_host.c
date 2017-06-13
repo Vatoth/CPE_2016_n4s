@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Thu May  4 12:29:27 2017 Léandre Blanchard
-** Last update Mon Jun  5 16:00:13 2017 Léandre Blanchard
+** Last update Tue Jun  6 14:22:56 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -32,10 +32,16 @@ void			special_refresh(t_window *window, t_texture *textures)
 int			somedisplay(t_window *window, t_texture *textures,
 			    t_player *players, float speed)
 {
+  char			*disp;
+
   special_refresh(window, textures);
   display_players(window, textures, players);
   display_me(window, textures, players, speed);
-  put_number((int)timer.time, XY(0, H_ - 30), window, sfWhite);
+  if ((disp = my_calloc(my_intlen(timer.time * 10))) == NULL)
+    return (-1);
+  sprintf(disp, "%d min %d sec", (int)timer.time / 60, (int)timer.time % 60);
+  put_word(disp, XY(10, H_ - 40), window, sfWhite);
+  free(disp);
   sfRenderWindow_display(window->window);
   return (0);
 }

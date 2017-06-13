@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May  3 17:40:29 2017 Léandre Blanchard
-** Last update Wed May 31 21:31:06 2017 Léandre Blanchard
+** Last update Fri Jun  9 08:24:51 2017 Léandre Blanchard
 */
 
 #include "n4s.h"
@@ -35,14 +35,14 @@ static int	display(t_window *window, t_texture *textures,
 {
   static int    a;
   int           i;
+  static int    alt = 1;
   int           kart;
 
-  i = 0;
-  put_sprite(window, textures->sprites[0], ORIGIN);
-  put_sprite(window, textures->lakitu[a / 35  % 8],
-	     XY(W_2 + 10 * cos((float)a / 20), 50 + 10 * sin((float)a / 20)));
-  if (key_released(sfKeySpace))
-    players[0].info->skin = (players[0].info->skin + 1) % NB_KARTS;
+  i = 1;
+  put_sprite(window, SPRITE(LOBBY), ORIGIN);
+  put_sprite_resize(window, textures->karts[players[0].info->skin][a / 30],
+		    XY(W_2 - 115, H_2 - 115), XY(7, 7));
+  put_word(players[0].info->name, XY(W_2 - 65, H_2 - 155), window, sfWhite);
   while (i < MAX_PLAYERS)
     {
       if ((kart = players[i].info->skin) > -1
@@ -55,7 +55,8 @@ static int	display(t_window *window, t_texture *textures,
 	}
       i++;
     }
-  a = (a + 1) % 1600;
+  alt =(a == 0) ? 1 : (a == 300) ? 0 : alt;
+  a = (alt == 1) ? (a + 1) : (a - 1);
   return (0);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <quentin.sonnefraud@epitech.eu>
 ** 
 ** Started on  Mon May 22 17:52:06 2017 
-** Last update Mon Jun  5 14:55:28 2017 
+** Last update Tue Jun  6 16:47:45 2017 
 */
 
 #include <stdio.h>
@@ -21,7 +21,7 @@ static void	get_info(t_info *info, char *line)
 
   i = 0;
   if ((tmp = calloc(strlen(line) + 1, sizeof(char))) == NULL)
-    exit (84);
+    exit(84);
   strcpy(tmp, line);
   strtok(tmp, ":");
   info->middle = -1;
@@ -33,7 +33,7 @@ static void	get_info(t_info *info, char *line)
 	info->middle = atof(pointer);
       if (i < 17)
 	info->left = info->left + atof(pointer);
-      if (i > 17)
+      if (i >= 17)
 	info->right = info->right + atof(pointer);
       i += 1;
     }
@@ -87,7 +87,7 @@ static void		turn(char *line)
     my_turn = 0.345;
   else
     my_turn = 0.95;
-  if ((lidar.left - lidar.right ) < 0)
+  if ((lidar.left - lidar.right ) <= 0)
     dprintf(1, "WHEELS_DIR:-%f\n", my_turn);
   else
     dprintf(1, "WHEELS_DIR:%f\n", my_turn);
@@ -99,7 +99,7 @@ static int	track_clear(char *line)
   char		*tmp;
 
   if ((tmp = calloc(strlen(line) + 1, sizeof(char))) == NULL)
-    exit (0);
+    exit(0);
   strcpy(tmp, line);
   strtok(tmp, ":");
   while ((pointer = (strtok(NULL, ":"))) != NULL)

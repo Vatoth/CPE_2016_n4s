@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Thu Jun  1 17:07:39 2017 Léandre Blanchard
-** Last update Mon Jun  5 12:59:12 2017 Léandre Blanchard
+** Last update Tue Jun  6 15:11:27 2017 Léandre Blanchard
 */
 
 #include <stdio.h>
@@ -35,6 +35,7 @@ int	can_see(sfVector2f from, sfVector2f to, char **map)
   a = (to.y - from.y) / (to.x - from.x);
   b = from.y - (a * from.x);
   x = from.x;
+  return (1);
   while (x < to.x)
     {
       y = a * x + b;
@@ -42,7 +43,7 @@ int	can_see(sfVector2f from, sfVector2f to, char **map)
 	  y >= 0 && y < my_strlen(map[(int)x]))
 	if (map[(int)x][(int)y] != '0')
 	  return (0);
-      x += 0.5;
+      x += 2;
     }
   return (1);
 }
