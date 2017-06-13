@@ -5,7 +5,7 @@
 ## Login   <leandre.blanchard@epitech.eu>
 ## 
 ## Started on  Thu Dec 15 20:24:11 2016 Léandre Blanchard
-## Last update Sat Jun 10 16:00:47 2017 
+## Last update Tue Jun 13 21:54:42 2017 
 ##
 
 NAME	= tek_kart
@@ -59,7 +59,6 @@ all: $(LIB_A) $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) -o $(NAME) $(CFLAGS) $(LIB)
-	@       tput setaf 2; cat include/signature; tput sgr0
 
 clean:
 	$(RM) $(OBJ)
